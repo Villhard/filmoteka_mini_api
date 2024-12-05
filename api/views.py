@@ -1,5 +1,5 @@
 from rest_framework import status, viewsets
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -47,3 +47,11 @@ class FilmViewSet(viewsets.ModelViewSet):
 
         instance.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(["GET"])
+def get_favorite_films(request):
+    user = request.user
+    favorite_films = Film.objects.filter(favorited_by__user=user)
+    serializer = FilmSerializer(favorite_films, many=True, context={"request": request})
+    return Response(serializer.data, status=status.HTTP_200_OK)
