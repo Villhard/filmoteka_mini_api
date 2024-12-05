@@ -8,9 +8,7 @@ class FilmSerializer(serializers.ModelSerializer):
 
     def get_is_favorited(self, obj):
         user = self.context["request"].user
-        if user.is_anonymous:
-            return False
-        return obj.favorited_by.filter(user=user).exists()
+        return not user.is_anonymous and obj.favorited_by.filter(user=user).exists()
 
     class Meta:
         model = Film
