@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework.authtoken",
+    "djoser",
     "api",
 ]
 
@@ -28,6 +29,10 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
+}
+
+DJOSER = {
+    "USER_CREATE_PASSWORD_RETYPE": True,
 }
 
 MIDDLEWARE = [
