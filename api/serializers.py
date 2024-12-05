@@ -10,8 +10,8 @@ class FilmSerializer(serializers.ModelSerializer):
         user = self.context["request"].user
         if user.is_anonymous:
             return False
-        return obj.favorited_by.filter(id=user.id).exists()
+        return obj.favorited_by.filter(user=user).exists()
 
     class Meta:
         model = Film
-        fields = ["title", "description", "release_date", "is_favorited"]
+        fields = ["id", "title", "description", "release_date", "is_favorited"]
