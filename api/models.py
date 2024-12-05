@@ -23,10 +23,7 @@ class Favorite(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(
-                fields=['film', 'user'],
-                name='unique_favorite'
-            )
+            models.UniqueConstraint(fields=["film", "user"], name="unique_favorite")
         ]
 
     def __str__(self):
