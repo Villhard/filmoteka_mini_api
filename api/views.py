@@ -1,9 +1,10 @@
 from rest_framework import status, viewsets
 from rest_framework.decorators import action, api_view
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.models import Film, Favorite
+from api.models import Favorite, Film
 from api.permissions import IsAdminOrReadOnly
 from api.serializers import FilmSerializer
 
@@ -49,9 +50,9 @@ class FilmViewSet(viewsets.ModelViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(["GET"])
-def get_favorite_films(request):
-    user = request.user
-    favorite_films = Film.objects.filter(favorited_by__user=user)
-    serializer = FilmSerializer(favorite_films, many=True, context={"request": request})
-    return Response(serializer.data, status=status.HTTP_200_OK)
+class FavoriteFilmsView(ListAPIView):
+    serializer_class = FilmSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Film.objects.filter(favorited_by__user=self.request.user)
