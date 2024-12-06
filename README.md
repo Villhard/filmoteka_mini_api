@@ -34,3 +34,43 @@
 - Django REST framework
 - Djoser
 - SQLite
+
+## Установка
+1. Клонировать репозиторий
+```bash
+git clone https://github.com/Villhard/filmoteka_mini_api.git
+```
+2. Перейти в папку проекта
+```bash
+cd filmoteka_mini_api
+```
+3. Создать виртуальное окружение
+```bash
+python -m venv venv
+```
+4. Активировать виртуальное окружение
+
+Windows:
+```bash
+venv\Scripts\activate
+```
+Linux/MacOS:
+```bash
+source venv/bin/activate
+```
+5. Установить зависимости
+```bash
+pip install -r requirements.txt
+```
+6. Применить миграции
+```bash
+python manage.py migrate
+```
+7. Создать суперпользователя
+```bash
+python manage.py createsuperuser
+```
+8. Запустить сервер
+```bash
+python manage.py runserver
+```
