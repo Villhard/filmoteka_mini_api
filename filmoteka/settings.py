@@ -1,12 +1,28 @@
 from pathlib import Path
 
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Settings(BaseSettings):
+    SECRET_KEY: str
+    DEBUG: bool
+    ALLOWED_HOSTS: list[str]
+
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+    )
+
+
+settings = Settings()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-ei)6te$4g&_fn!8jbht()r88xa-h$u8rvnz_!k*)3%6p6l2-ay"
+SECRET_KEY = settings.SECRET_KEY
 
-DEBUG = True
+DEBUG = settings.DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
 INSTALLED_APPS = [
     "django.contrib.admin",
