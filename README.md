@@ -62,15 +62,19 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
-6. Применить миграции
+6. Создать файл `.env` из шаблона `.env.example` и заполнить его данными
+```bash
+cp .env.example .env
+```
+7. Применить миграции
 ```bash
 python manage.py migrate
 ```
-7. Создать суперпользователя
+8. Создать суперпользователя
 ```bash
 python manage.py createsuperuser
 ```
-8. Запустить сервер
+9. Запустить сервер
 ```bash
 python manage.py runserver
 ```
